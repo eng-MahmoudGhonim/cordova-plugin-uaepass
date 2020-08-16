@@ -24,7 +24,6 @@ UAEPassActivity must added in AndroidManifest.xml
         </activity>
 step 3
 create new layout "uaepass_login.xml"
-
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,3 +41,4 @@ create new layout "uaepass_login.xml"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </RelativeLayout>
+done
