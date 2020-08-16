@@ -8,6 +8,7 @@
 * Must build platform after Add | Remove :`cordova build andoird`
 
 ## Step 2 :UAEPassActivity need to be added to AndroidManifest.xml
+![](img/manifest.png)
  `<activity android:label="UAE Pass Activity" android:launchMode="singleTask" android:name="cordova.plugin.uaepassplugin.UAEPassActivity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
                 <data android:scheme="uaepassdemoapp" />
@@ -17,6 +18,7 @@
             </intent-filter>
 </activity>`
 ## step 3 :Create new layout "uaepass_login.xml"
+![](img/layout.png)
 `<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
