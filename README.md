@@ -1,15 +1,16 @@
-# cordova-plugin-uaepass
+# cordova-plugin-uaepass Android Platform
 
-## Step 1
+
+## Step 1 How to add | remove uaepassplugin 
 
 How To Add: `cordova plugin add https://github.com/eng-MahmoudGhonim/cordova-plugin-uaepass.git`
 
 How To Remove :`cordova plugin remove cordova.plugin.uaepassplugin`
 
 must build platform after Add|Remove :
-`cordova build andoird|ios`
+`cordova build andoird`
 
-## Step 2 :UAEPassActivity must added in AndroidManifest.xml
+## Step 2 :UAEPassActivity need to be added to AndroidManifest.xml
  `<activity android:label="UAE Pass Activity" android:launchMode="singleTask" android:name="cordova.plugin.uaepassplugin.UAEPassActivity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
                 <data android:scheme="uaepassdemoapp" />
@@ -18,7 +19,7 @@ must build platform after Add|Remove :
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>`
-## step 3 :create new layout "uaepass_login.xml"
+## step 3 :Create new layout "uaepass_login.xml"
 `<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
