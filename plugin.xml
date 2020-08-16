@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova.plugin.uaepassplugin" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<name>UAEpassPlugin</name><js-module name="UAEpassPlugin" src="www/UAEpassPlugin.js"><clobbers target="cordova.plugins.UAEpassPlugin" />
+</js-module><platform name="android"><config-file parent="/*" target="res/xml/config.xml">
+<feature name="UAEpassPlugin"><param name="android-package" value="cordova.plugin.uaepassplugin.UAEpassPlugin" />
+</feature></config-file><config-file parent="/*" target="AndroidManifest.xml">
+</config-file>
+<source-file src="src/android/UAEpassPlugin.java" target-dir="src/cordova/plugin/uaepassplugin/UAEpassPlugin" />
+<source-file src="src/android/UAEPassActivity.java" target-dir="src/cordova/plugin/uaepassplugin/UAEpassPlugin" />
+
+</platform></plugin>

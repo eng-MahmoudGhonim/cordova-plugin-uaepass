@@ -1,0 +1,17 @@
+{
+  "name": "cordova.plugin.uaepassplugin",
+  "version": "1.0.0",
+  "description": "test",
+  "cordova": {
+    "id": "cordova.plugin.uaepassplugin",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Ghonim",
+  "license": "ISC"
+}
