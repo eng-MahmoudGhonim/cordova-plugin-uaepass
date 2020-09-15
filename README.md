@@ -38,5 +38,5 @@
 </RelativeLayout>`
 
 ## step 4 :UAEPassActivity.java
-update import R according to your android Package name
+update import R according to your android Package name 
 `import <YOUR-PROJECT-PACKGENAME>.R;`
