@@ -39,4 +39,4 @@
 
 ## step 4 :UAEPassActivity.java
 update import R according to your android Package name
-'import <YOUR-PROJECT-PACKGENAME>.R;'
+`import <YOUR-PROJECT-PACKGENAME>.R;`
