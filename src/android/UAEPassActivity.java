@@ -21,7 +21,8 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.RTA_Common_Shell.R;
+import <YOUR-PROJECT-PACKGENAME>.R;
+
 
 import java.util.Set;
 import java.util.logging.Level;
