@@ -73,17 +73,17 @@ public class UAEPassActivity extends Activity {
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
 				if (url.contains("uaepass://digitalid")) {
-					url = url.replace("uaepass://" , "uaepassqa://");
-					mSuccessURLUAEPass = getQueryParameterValue(url,"successurl");
-					String mFailureURLUAEPass = getQueryParameterValue(url,"failureurl");
-					if(url.contains("successurl")){
-						logger.log(Level.INFO,"@Successurl :" +url);
+					url = url.replace("uaepass://", "uaepassqa://");
+					mSuccessURLUAEPass = getQueryParameterValue(url, "successurl");
+					String mFailureURLUAEPass = getQueryParameterValue(url, "failureurl");
+					if (url.contains("successurl")) {
+						logger.log(Level.INFO, "@Successurl :" + url);
 
 						url = replaceUriParameter(Uri.parse(url), "successurl", "uaepassdemoapp://dubaidrive").toString();
 					}
-					if(url.contains("failureurl")){
+					if (url.contains("failureurl")) {
 						url = replaceUriParameter(Uri.parse(url), "failureurl", "uaepassdemoapp://dubaidrive").toString();
-						logger.log(Level.INFO,"@Failureurl :" +url);
+						logger.log(Level.INFO, "@Failureurl :" + url);
 					}
 					Intent launchIntent = new Intent("android.intent.action.VIEW", Uri.parse(url));
 					PackageManager packageManager = getPackageManager();
@@ -97,17 +97,18 @@ public class UAEPassActivity extends Activity {
 					}
 					return true;
 				} else {
+					logger.log(Level.INFO, "UAE Pass start checking :" + url);
 					//	if (url.startsWith("uaepassdemoapp://dubaidrive")) {
-					if (url.contains("UAEPassCallback/uaePassRedirect") && url.contains("code=")){
+					if (url.contains("UAEPassCallback/uaePassRedirect") && url.contains("code=")) {
 						String code = getQueryParameterValue(url, "code");
 						String state_ = getQueryParameterValue(url, "state");
 						String error = getQueryParameterValue(url, "error");
-						if(error != null){
+						if (error != null) {
 							webViewAlertDialog.dismiss();
-							if(error.contains("access_denied")){
+							if (error.contains("access_denied")) {
 								// access _deneid
-								logger.log(Level.INFO,"@access denied :");
-							}else{
+								logger.log(Level.INFO, "@access denied :");
+							} else {
 								// some error heepend here
 							}
 							webViewAlertDialog.dismiss();
@@ -123,7 +124,30 @@ public class UAEPassActivity extends Activity {
 						finish();
 
 						return true;
+					} else if (url.contains("UAEPassCallback/uaePassRedirect"))						{
+
+						logger.log(Level.INFO, "UAE Pass without code return back @@@@@@@@@@@@@@ :" + url);
+
+
+						String error = getQueryParameterValue(url, "error");
+						if (error != null) {
+
+							if (error.contains("access_denied")) {
+								// access _deneid
+								webViewAlertDialog.dismiss();
+								Intent i = new Intent();
+								Uri data = Uri.parse(url);
+								i.setData(data);
+								setResult(Activity.RESULT_OK, i);
+								finish();
+								logger.log(Level.INFO, "@access denied :");
+								return true;
+							}}
+
+							view.loadUrl(url);
+						return false;
 					} else {
+						logger.log(Level.INFO, "else @@@@@@@@@@@@@@ :");
 						view.loadUrl(url);
 						return false;
 					}
