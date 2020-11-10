@@ -73,7 +73,9 @@ public class UAEPassActivity extends Activity {
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
 				if (url.contains("uaepass://digitalid")) {
-					url = url.replace("uaepass://", "uaepassqa://");
+					
+					//Staging only you must replace uaepass with uaepassqa
+					//url = url.replace("uaepass://", "uaepassqa://");
 					mSuccessURLUAEPass = getQueryParameterValue(url, "successurl");
 					String mFailureURLUAEPass = getQueryParameterValue(url, "failureurl");
 					if (url.contains("successurl")) {
