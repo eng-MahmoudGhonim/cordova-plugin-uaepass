@@ -1,9 +1,9 @@
 var exec = require('cordova/exec');
 
 
-    exports._show=function(url, successCallback, errorCallback, loading) {
-    		if(loading){
-    			exec(successCallback, errorCallback, 'UAEpassPlugin', 'show', [url, loading]);
+    exports._show=function(url, successCallback, errorCallback, isDevelopment) {
+    		if(isDevelopment){
+    			exec(successCallback, errorCallback, 'UAEpassPlugin', 'show', [url, isDevelopment]);
     		}
     		else{
     			exec(successCallback, errorCallback, 'UAEpassPlugin', 'show', [url]);
