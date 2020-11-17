@@ -67,16 +67,19 @@ public class UAEpassPlugin extends CordovaPlugin {
 			final String url = args.getString(0);
 			System.err.println("UAEpassPlugin execute @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+url);
 
-			Boolean shouldShowLoading = false;
+
+			Boolean isDevelopment = false;
 			try {
-				shouldShowLoading = args.getBoolean(1);
+				isDevelopment = args.getBoolean(1);
 			} catch (Exception e) {
 
 			}
-			
+			System.err.println("UAEpassPlugin execute @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@isDevelopment="+isDevelopment);
+
+
 			if (!"".equals(url)) {
 				System.err.println("UAEpassPlugin execute Before call showWebView @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+url);
-				showWebView(url, shouldShowLoading);
+				showWebView(url, isDevelopment);
 				JSONObject r = new JSONObject();
 				r.put("responseCode", "ok");
 				callbackContext.success(r);
@@ -115,16 +118,16 @@ public class UAEpassPlugin extends CordovaPlugin {
 		return true;
 	}
 
-	private void showWebView(final String url, Boolean shouldShowLoading) {
+	private void showWebView(final String url, Boolean isDevelopment) {
 		LOG.d(LOG_TAG, "Url: " + url);
 		System.err.println("UAEpassPlugin showWebView @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+url);
 		
-		System.err.println("UAEpassPlugin showWebView UAEPassActivity.class @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+UAEPassActivity.class);
+		System.err.println("UAEpassPlugin showWebView UAEPassActivity.class @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+ UAEPassActivity.class);
 
 		Intent i = new Intent(this.cordova.getActivity(), UAEPassActivity.class);
 		System.err.println("UAEpassPlugin showWebView object of intent  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+i);
 		i.putExtra("url", url);
-		i.putExtra("shouldShowLoading", shouldShowLoading);
+		i.putExtra("isDevelopment", isDevelopment);
 		System.err.println("UAEpassPlugin showWebView this  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+this);
 		this.cordova.setActivityResultCallback(this);
 		this.cordova.getActivity().startActivityForResult(i, 1111);
