@@ -73,9 +73,12 @@ public class UAEPassActivity extends Activity {
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
 				if (url.contains("uaepass://digitalid")) {
-					
-					//Staging only you must replace uaepass with uaepassqa
-					//url = url.replace("uaepass://", "uaepassqa://");
+					if(isDevelopment) {
+						url = url.replace("uaepass://", "uaepassqa://");
+						logger.log(Level.INFO, "@replace uaepass with uaepassqa  :cause isDevelopment=" + isDevelopment);
+					}else{
+						logger.log(Level.INFO, "@donot replace uaepass with uaepassqa  :cause isDevelopment=" + isDevelopment);
+					}
 					mSuccessURLUAEPass = getQueryParameterValue(url, "successurl");
 					String mFailureURLUAEPass = getQueryParameterValue(url, "failureurl");
 					if (url.contains("successurl")) {
@@ -177,13 +180,17 @@ public class UAEPassActivity extends Activity {
 		Bundle b = getIntent().getExtras();
 		String url = b.getString("url");
 		logger.log(Level.INFO,"@URL :"+ url);
-
+		try{
+			isDevelopment = b.getBoolean("isDevelopment");
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		login(url);
 
 
 
 	}
-
+	boolean isDevelopment=false;
 	private String getQueryParameterValue(String url, String queryParameter) {
 		Uri uri = Uri.parse(url);
 		String value = uri.getQueryParameter(queryParameter);
