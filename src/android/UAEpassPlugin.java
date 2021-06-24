@@ -60,35 +60,36 @@ public class UAEpassPlugin extends CordovaPlugin {
 	 */
 	 @Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-		System.err.println("UAEpassPlugin execute @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >:execute");
+		System.err.println("Execute @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >:execute");
 
 		if (action.equals("show") && args.length() > 0) {
-			LOG.d(LOG_TAG, "Show Web View");
+			LOG.i(LOG_TAG, "Show Web View");
 			final String url = args.getString(0);
-			System.err.println("UAEpassPlugin execute @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+url);
-
+			LOG.i(LOG_TAG, "UAEpassPlugin execute action Show"+url);
 
 			Boolean isDevelopment = false;
 			try {
-				isDevelopment = args.getBoolean(1);
-			} catch (Exception e) {
 
+				isDevelopment = args.getBoolean(1);
+
+			} catch (Exception e) {
 			}
-			System.err.println("UAEpassPlugin execute @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@isDevelopment="+isDevelopment);
+			LOG.i(LOG_TAG, " Execute isDevelopment="+isDevelopment);
 
 
 			if (!"".equals(url)) {
-				System.err.println("UAEpassPlugin execute Before call showWebView @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+url);
+				LOG.i(LOG_TAG, " Execute Before call showWebView> Url is not null :  >"+url);
 				showWebView(url, isDevelopment);
 				JSONObject r = new JSONObject();
 				r.put("responseCode", "ok");
 				callbackContext.success(r);
 			} else {
+				LOG.i(LOG_TAG, " Execute Else with null URL ");
 				callbackContext.error("Empty Parameter url");
 			}
 
 		} else if (action.equals("hide")) {
-			LOG.d(LOG_TAG, "Hide Web View");
+			LOG.i(LOG_TAG, "Execute else if  Hide Web View");
 			results = args;
 			hideWebView();
 			JSONObject r = new JSONObject();
@@ -96,16 +97,16 @@ public class UAEpassPlugin extends CordovaPlugin {
 			callbackContext.success(r);
 		}
 		else if (action.equals("subscribeCallback")) {
-			LOG.d(LOG_TAG, "Subscribing Cordova CallbackContext");
+			LOG.i(LOG_TAG, "Execute subscribeCallback");
 			subscribeCallbackContext = callbackContext;
 		}
 
 		else if (action.equals("subscribeExitCallback")) {
-			LOG.d(LOG_TAG, "Subscribing Cordova ExitCallbackContext");
+			LOG.i(LOG_TAG, "Execute Subscribing Cordova subscribeExitCallback");
 			subscribeExitCallbackContext = callbackContext;
 		}
 		else if (action.equals("exitApp")) {
-			LOG.d(LOG_TAG, "Exiting app?");
+			LOG.i(LOG_TAG, "Execute Exiting app?");
 			if (subscribeExitCallbackContext != null) {
 				subscribeExitCallbackContext.success();
 				subscribeExitCallbackContext = null;
@@ -119,24 +120,24 @@ public class UAEpassPlugin extends CordovaPlugin {
 	}
 
 	private void showWebView(final String url, Boolean isDevelopment) {
-		LOG.d(LOG_TAG, "Url: " + url);
-		System.err.println("UAEpassPlugin showWebView @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+url);
-		
-		System.err.println("UAEpassPlugin showWebView UAEPassActivity.class @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+ UAEPassActivity.class);
+		LOG.i(LOG_TAG, "showWebView Url: " + url);
+		//System.err.println(" showWebView @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+url);
+
+		LOG.i(LOG_TAG,"showWebView UAEPassActivity.class > >"+ UAEPassActivity.class);
 
 		Intent i = new Intent(this.cordova.getActivity(), UAEPassActivity.class);
-		System.err.println("UAEpassPlugin showWebView object of intent  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+i);
+		LOG.i(LOG_TAG,"showWebView showWebViewobject of intent  > >"+i);
 		i.putExtra("url", url);
 		i.putExtra("isDevelopment", isDevelopment);
-		System.err.println("UAEpassPlugin showWebView this  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+this);
+		LOG.i(LOG_TAG,"showWebView showWebViewobject this > >"+this);
 		this.cordova.setActivityResultCallback(this);
 		this.cordova.getActivity().startActivityForResult(i, 1111);
 	}
 
 	private void hideWebView() {
-		LOG.d(LOG_TAG, "hideWebView");
+		LOG.i(LOG_TAG, "hideWebView begin");
 		if (subscribeCallbackContext != null) {
-			LOG.d(LOG_TAG, "Calling subscribeCallbackContext success");
+			LOG.i(LOG_TAG, "hideWebViewCalling subscribeCallbackContext success");
 			subscribeCallbackContext.success(results);
 			subscribeCallbackContext = null;
 			results = null;
@@ -149,15 +150,16 @@ public class UAEpassPlugin extends CordovaPlugin {
 		// TODO Auto-generated method stub
 		if (resultCode == Activity.RESULT_OK && requestCode == 1111) {
 			String data = intent.getData().toString();
-			LOG.d("Data", data);
+			LOG.i(LOG_TAG, "onActivityResult", data);
 			JSONObject r = new JSONObject();
-			System.err.println("UAEpassPlugin onActivityResult @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Ste> >"+r);
+			LOG.i(LOG_TAG, "onActivityResult result> >"+r);
 
 			try {
 				r.put("url", data);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				LOG.e(LOG_TAG, "onActivityResult exeception  >"+e);
 			}
 			subscribeCallbackContext.success(r);			
 		}

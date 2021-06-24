@@ -10,13 +10,28 @@
 ## Step 2 :UAEPassActivity need to be added to AndroidManifest.xml
 ![](img/manifest.png)
  `<activity android:label="UAE Pass Activity" android:launchMode="singleTask" android:name="cordova.plugin.uaepassplugin.UAEPassActivity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+
             <intent-filter>
-                <data android:scheme="uaepassdemoapp" />
-                <data android:host="dubaidrive" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="dubaidrivesuccess"
+                    android:scheme="uaepassrtaapp" />
+
+                <data
+                    android:host="dubaidrivefailure"
+                    android:scheme="uaepassrtaapp" />
+            </intent-filter>
+
+
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-</activity>`
+        </activity>`
 ## step 3 :Create new layout "uaepass_login.xml"
 ![](img/layout.png)
 `<?xml version="1.0" encoding="utf-8"?>
